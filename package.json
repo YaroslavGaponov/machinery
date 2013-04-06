@@ -1,0 +1,25 @@
+{
+  "name": "machinery",
+  "version": "0.0.2",
+  "description": "machinery is simple state machine",
+  "author": {
+    "name": "Yaroslav Gaponov"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/YaroslavGaponov/machinery.git"
+  },
+  "keywords": [
+    "state machine",
+    "grabber"
+  ],
+  "engines": {
+    "node": "*"
+  },
+  "readme": "Info\n=======\n\nMachinery is state machine in pure javascript.\n\n\nExample\n=======\n\nSearch href in html page\n\n```javascript\n    new StateMachine(\"start\")\n    \n        .state(\"start\")\n            .if(classifier.isChar(\"<\"), \"search_A\")\n            \n        .state(\"search_A\")\n            .if(classifier.isChars(\"aA\"), \"search_H\")\n            \n        .state(\"search_H\")\n            .if(classifier.isDelimiter, \"search_H\")\n            .if(classifier.isChars(\"hH\"), \"search_R\")\n    \n        .state(\"search_R\")\n            .if(classifier.isChars(\"rR\"), \"search_E\")\n\n        .state(\"search_E\")\n            .if(classifier.isChars(\"eE\"), \"search_F\")\n\n        .state(\"search_F\")\n            .if(classifier.isChars(\"fF\"), \"search_Equal\")\n                \n        .state(\"search_Equal\")\n            .if(classifier.isChars(\"=\"), \"search_Quote\")\n            .if(classifier.isDelimiter, \"search_Equal\")\n\n        .state(\"search_Quote\")\n            .if(classifier.isChars(\"\\'\"), \"readLink_1\")\n            .if(classifier.isChars(\"\\\"\"), \"readLink_2\")\n            .if(classifier.isDelimiter, \"search_Quote\")\n        \n        .state(\"readLink_1\")\n            .if(classifier.isNotChars(\"\\'\"), \"readLink_1\")\n            .else(\"link_1\")\n                    \n        .state(\"readLink_2\")\n            .if(classifier.isNotChars(\"\\\"\"), \"readLink_2\")\n            .else(\"link_2\")\n        \n        .run(HTML)\n            .forEach(o) {\n                console.log(o);\n            }\n            \n    ;   \n\n```",
+  "_id": "machinery@0.0.1",
+  "dist": {
+    "shasum": "0cced71ec7961a817244e8fba7b1dd4f2bc60448"
+  },
+  "_from": "machinery"
+}
