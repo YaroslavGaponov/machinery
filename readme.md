@@ -49,10 +49,9 @@ Search href in html page
             .else("link_2")
         
         .run(HTML)
-            .forEach(o) {
+            .forEach(function(o) {
                 console.log(o);
-            }
-            
+            })
     ;   
 
 ```
